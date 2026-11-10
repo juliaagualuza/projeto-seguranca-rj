@@ -1,0 +1,22 @@
+import os
+import pandas as pd
+import numpy as np
+
+def run_pipeline():
+    print("Iniciando ETL...")
+    raw_dir = os.path.join("data", "raw")
+    processed_dir = os.path.join("data", "processed")
+    os.makedirs(processed_dir, exist_ok=True)
+    
+    path_ocorr = os.path.join(raw_dir, "BaseMunicipioMensal.csv")
+    if os.path.exists(path_ocorr):
+        df = pd.read_csv(path_ocorr, sep=';', encoding='latin1')
+        df.columns = df.columns.str.strip().str.lower()
+        out_path = os.path.join(processed_dir, "isp_rj_processed.csv")
+        df.to_csv(out_path, index=False, encoding='utf-8')
+        print(f"Base processada salva em: {out_path}")
+    else:
+        print("Arquivo BaseMunicipioMensal.csv não encontrado em data/raw/")
+
+if __name__ == "__main__":
+    run_pipeline()
