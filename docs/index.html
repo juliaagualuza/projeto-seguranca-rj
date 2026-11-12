@@ -111,6 +111,24 @@
             margin-bottom: 1.5rem;
             border-left: 4px solid var(--primary-color);
         }
+        .figure-container {
+            text-align: center;
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background: #fff;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+        }
+        .figure-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+        .figure-container figcaption {
+            font-size: 0.85rem;
+            color: #4b5563;
+            margin-top: 0.5rem;
+        }
         footer {
             text-align: center;
             padding: 2rem;
@@ -154,9 +172,7 @@
 
 # Carregamento da base bruta
 df = pd.read_excel('../data/raw/BaseDossie.xlsx')
-<img src="assets/evolucao_anual.png" alt="Evolução Anual dos Registros" style="max-width:100%; height:auto;">
-<img src="assets/municipios_top.png" alt="Municípios com Maiores Registros" style="max-width:100%; height:auto;">
-<img src="assets/indicadores.png" alt="Principais Indicadores" style="max-width:100%; height:auto;">
+
 # Inspeção e tratamento de nulos/tipos
 df['mes_ano'] = pd.to_datetime(df['mes'] | df['ano'].astype(str), errors='coerce')
 
@@ -167,6 +183,7 @@ df.to_parquet('../data/processed/dados_limpos.parquet', index=False)
 
         <section>
             <h2>3. Resultados e Discussão</h2>
+            
             <h3>3.1. Evolução Temporal</h3>
             <p>Os dados apontam oscilações nos totais anuais, com quedas expressivas em 2020 e retomada de crescimento nos anos subsequentes até 2025.</p>
             <table>
@@ -184,6 +201,11 @@ df.to_parquet('../data/processed/dados_limpos.parquet', index=False)
             </table>
             <p><small>*Nota: 2026 contempla dados parciais de janeiro a setembro.</small></p>
 
+            <div class="figure-container">
+                <img src="assets/evolucao_anual.png" alt="Evolução Anual dos Registros de Ocorrências Policiais">
+                <figcaption><strong>Figura 1:</strong> Evolução anual dos registros de ocorrências policiais (2014–2026).</figcaption>
+            </div>
+
             <h3>3.2. Distribuição Territorial por Município</h3>
             <p>A capital concentra o maior volume absoluto de ocorrências na série histórica:</p>
             <table>
@@ -198,6 +220,17 @@ df.to_parquet('../data/processed/dados_limpos.parquet', index=False)
                     <tr><td>Niterói</td><td>368.506</td></tr>
                 </tbody>
             </table>
+
+            <div class="figure-container">
+                <img src="assets/municipios_top.png" alt="Municípios com Maiores Quantidades Acumuladas de Registros">
+                <figcaption><strong>Figura 2:</strong> Municípios com maiores quantidades acumuladas de registros.</figcaption>
+            </div>
+
+            <h3>3.3. Principais Indicadores de Segurança</h3>
+            <div class="figure-container">
+                <img src="assets/indicadores.png" alt="Principais Indicadores de Segurança Pública">
+                <figcaption><strong>Figura 3:</strong> Distribuição dos principais indicadores de segurança pública.</figcaption>
+            </div>
         </section>
 
         <section>
