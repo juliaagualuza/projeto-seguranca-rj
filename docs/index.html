@@ -154,7 +154,9 @@
 
 # Carregamento da base bruta
 df = pd.read_excel('../data/raw/BaseDossie.xlsx')
-
+<img src="assets/evolucao_anual.png" alt="Evolução Anual dos Registros" style="max-width:100%; height:auto;">
+<img src="assets/municipios_top.png" alt="Municípios com Maiores Registros" style="max-width:100%; height:auto;">
+<img src="assets/indicadores.png" alt="Principais Indicadores" style="max-width:100%; height:auto;">
 # Inspeção e tratamento de nulos/tipos
 df['mes_ano'] = pd.to_datetime(df['mes'] | df['ano'].astype(str), errors='coerce')
 
