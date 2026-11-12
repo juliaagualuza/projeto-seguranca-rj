@@ -1,1 +1,229 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análise Temporal e Espacial da Criminalidade no Estado do Rio de Janeiro (2014–2026)</title>
+    <style>
+        :root {
+            --primary-color: #1e3a8a;
+            --text-color: #1f2937;
+            --bg-color: #f9fafb;
+            --card-bg: #ffffff;
+            --border-color: #e5e7eb;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 2.5rem 1rem;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0 0 0.5rem 0;
+            font-size: 1.8rem;
+        }
+        header p {
+            margin: 0.2rem 0;
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+        .badges {
+            margin-top: 1rem;
+        }
+        .badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.3rem 0.8rem;
+            border-radius: 9999px;
+            font-size: 0.85rem;
+            text-decoration: none;
+            color: white;
+            display: inline-block;
+            margin: 0.2rem;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .badge:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        main {
+            max-width: 900px;
+            margin: 2rem auto;
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.3rem;
+            margin-top: 2rem;
+        }
+        h3 {
+            color: #374151;
+            margin-top: 1.5rem;
+        }
+        p, li {
+            text-align: justify;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.9rem;
+        }
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 0.75rem;
+            text-align: left;
+        }
+        th {
+            background-color: #f3f4f6;
+            color: var(--primary-color);
+        }
+        tr:nth-child(even) {
+            background-color: #f9fafb;
+        }
+        code, pre {
+            background-color: #f3f4f6;
+            font-family: monospace;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+        }
+        pre {
+            padding: 1rem;
+            overflow-x: auto;
+            border-left: 4px solid var(--primary-color);
+        }
+        .abstract {
+            background-color: #f3f4f6;
+            padding: 1.2rem;
+            border-radius: 6px;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--primary-color);
+        }
+        footer {
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.85rem;
+            color: #6b7280;
+        }
+    </style>
+</head>
+<body>
 
+    <header>
+        <h1>Análise Temporal e Espacial da Criminalidade no Estado do Rio de Janeiro (2014–2026)</h1>
+        <p><strong>Autora:</strong> Júlia Agualuza Barboza</p>
+        <p>Curso de Sistemas de Informação (6º Período) — Disciplina: Linguagem de Programação</p>
+        <div class="badges">
+            <a href="https://github.com/juliaagualuza/projeto-seguranca-rj" class="badge" target="_blank">📦 Ver Repositório GitHub</a>
+            <span class="badge">Licença: MIT</span>
+            <span class="badge">FAIR-Compliant</span>
+        </div>
+    </header>
+
+    <main>
+        <section class="abstract">
+            <h3>Resumo</h3>
+            <p>A análise de dados públicos representa uma importante ferramenta para compreender fenômenos sociais e apoiar a produção de conhecimento. Nesse contexto, este trabalho apresenta uma análise temporal e espacial dos registros de ocorrências policiais no estado do Rio de Janeiro, considerando dados disponibilizados pelo Instituto de Segurança Pública do Estado do Rio de Janeiro (ISP-RJ), referentes ao período de 2014 a 2026. O estudo utiliza Python como linguagem de programação e bibliotecas como Pandas, NumPy e Matplotlib para organização, manipulação e visualização dos dados. Os resultados identificam variações temporais e diferenças na distribuição territorial das ocorrências, com destaque para a concentração de registros na capital e em municípios da Região Metropolitana.</p>
+            <p><strong>Palavras-chave:</strong> Análise de dados; Segurança pública; Python; ISP-RJ; Visualização de dados.</p>
+        </section>
+
+        <section>
+            <h2>1. Introdução</h2>
+            <p>A segurança pública é um tema de grande relevância social, especialmente em estados que apresentam diferenças econômicas, demográficas e territoriais entre seus municípios. Compreender a distribuição das ocorrências policiais e suas variações ao longo do tempo permite observar características importantes da realidade de determinada região.</p>
+            <p>No estado do Rio de Janeiro, a disponibilidade de dados públicos sobre segurança possibilita a realização de estudos que utilizam recursos computacionais para organizar, analisar e representar informações. Este trabalho tem como objetivo principal analisar temporal e espacialmente os registros de ocorrências policiais no estado do Rio de Janeiro entre 2014 e 2026, com base nos dados do Instituto de Segurança Pública do Estado do Rio de Janeiro (ISP-RJ).</p>
+        </section>
+
+        <section>
+            <h2>2. Metodologia e Pipeline de Dados</h2>
+            <p>A base utilizada foi obtida diretamente no portal oficial do ISP-RJ. O fluxo analítico seguiu um pipeline determinístico em Python, garantindo rastreabilidade e reprodutibilidade.</p>
+            
+            <h3>Exemplo do Script de Tratamento (<code>src/etl.py</code>)</h3>
+            <pre><code>import pandas as pd
+
+# Carregamento da base bruta
+df = pd.read_excel('../data/raw/BaseDossie.xlsx')
+
+# Inspeção e tratamento de nulos/tipos
+df['mes_ano'] = pd.to_datetime(df['mes'] | df['ano'].astype(str), errors='coerce')
+
+# Persistência em formato otimizado e interoperável
+df.to_parquet('../data/processed/dados_limpos.parquet', index=False)
+            </code></pre>
+        </section>
+
+        <section>
+            <h2>3. Resultados e Discussão</h2>
+            <h3>3.1. Evolução Temporal</h3>
+            <p>Os dados apontam oscilações nos totais anuais, com quedas expressivas em 2020 e retomada de crescimento nos anos subsequentes até 2025.</p>
+            <table>
+                <thead>
+                    <tr><th>Ano</th><th>Total de Registros</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>2014</td><td>818.727</td></tr>
+                    <tr><td>2015</td><td>777.356</td></tr>
+                    <tr><td>2020</td><td>584.988</td></tr>
+                    <tr><td>2024</td><td>922.733</td></tr>
+                    <tr><td>2025</td><td>965.208</td></tr>
+                    <tr><td>2026*</td><td>755.979</td></tr>
+                </tbody>
+            </table>
+            <p><small>*Nota: 2026 contempla dados parciais de janeiro a setembro.</small></p>
+
+            <h3>3.2. Distribuição Territorial por Município</h3>
+            <p>A capital concentra o maior volume absoluto de ocorrências na série histórica:</p>
+            <table>
+                <thead>
+                    <tr><th>Município</th><th>Total Acumulado</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Rio de Janeiro</td><td>4.991.884</td></tr>
+                    <tr><td>Duque de Caxias</td><td>479.931</td></tr>
+                    <tr><td>São Gonçalo</td><td>473.700</td></tr>
+                    <tr><td>Nova Iguaçu</td><td>427.304</td></tr>
+                    <tr><td>Niterói</td><td>368.506</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section>
+            <h2>4. Conclusão</h2>
+            <p>O desenvolvimento permitiu aplicar conhecimentos práticos de engenharia de dados em Python, evidenciando padrões de concentração espacial na capital e oscilações temporais ao longo dos anos analisados.</p>
+        </section>
+
+        <section>
+            <h2>5. Disponibilidade dos Dados e Declaração FAIR</h2>
+            <ul>
+                <li><strong>Findable (Localizável):</strong> Repositório documentado com README detalhado e link perene para os dados originais.</li>
+                <li><strong>Accessible (Acessível):</strong> Código aberto sob licença MIT e visualização web via GitHub Pages.</li>
+                <li><strong>Interoperable (Interoperável):</strong> Uso de formatos abertos (.csv / .parquet) acompanhados de dicionário de dados em Markdown.</li>
+                <li><strong>Reusable (Reutilizável):</strong> Ambiente congelado via <code>requirements.txt</code>.</li>
+            </ul>
+            <p><strong>Repositório oficial:</strong> <a href="https://github.com/juliaagualuza/projeto-seguranca-rj" target="_blank">github.com/juliaagualuza/projeto-seguranca-rj</a></p>
+        </section>
+
+        <section>
+            <h2>6. Referências</h2>
+            <p>INSTITUTO DE SEGURANÇA PÚBLICA DO ESTADO DO RIO DE JANEIRO (ISP-RJ). <strong>Base de Dados Estatísticos</strong>. Disponível em: <a href="https://www.ispdados.rj.gov.br/" target="_blank">ispdados.rj.gov.br</a>. Acesso em: 2026.</p>
+            <p>MCKINNEY, Wes. <strong>Python for Data Analysis</strong>. 3. ed. O'Reilly Media, 2022.</p>
+            <p>WILKINSON, Mark D. et al. The FAIR Guiding Principles for scientific data management and stewardship. <strong>Scientific Data</strong>, v. 3, 2016.</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Júlia Agualuza Barboza — Bacharelado em Sistemas de Informação (UniLaSalle)</p>
+    </footer>
+
+</body>
+</html>
