@@ -1,37 +1,38 @@
+"""
+Módulo de ETL (Extract, Transform, Load) para o Projeto de Segurança Pública do RJ.
+Autor(a): Júlia Agualuza Barboza
+Curso: Sistemas de Informação - 6º Período
+"""
 
-import os
 import pandas as pd
+import numpy as np
 
-def run_pipeline():
-    print("Iniciando ETL...")
-
-    raw_dir = os.path.join("data", "raw")
-    processed_dir = os.path.join("data", "processed")
-
-    os.makedirs(processed_dir, exist_ok=True)
-
-    arquivo = os.path.join(raw_dir, "BaseMunicipioMensal.xlsx")
-
-    if not os.path.exists(arquivo):
-        print(f"Arquivo não encontrado: {arquivo}")
+def executar_pipeline():
+    print("Iniciando pipeline de tratamento de dados...")
+    
+    # 1. Extração (Leitura da base bruta do ISP-RJ)
+    # Substitua pelo nome exato do seu arquivo bruto em data/raw/
+    caminho_entrada = '../data/raw/BaseDossie.xlsx'
+    
+    try:
+        df = pd.read_excel(caminho_entrada)
+        print(f"Base carregada com sucesso. Dimensões originais: {df.shape}")
+    except FileNotFoundError:
+        print(f"Arquivo não encontrado em {caminho_entrada}. Verifique o caminho.")
         return
 
-    # Extração
-    df = pd.read_excel(arquivo)
+    # 2. Transformação (Limpeza e tratamento de nulos/tipos)
+    # Exemplo de normalização de colunas e tratamento de valores ausentes
+    df.columns = [str(col).lower().strip() for col in df.columns]
+    
+    # Tratamento básico de nulos em colunas numéricas de ocorrências se houverem
+    if 'ano' in df.columns:
+        df['ano'] = pd.to_numeric(df['ano'], errors='coerce')
 
-    # Transformação
-    df.columns = df.columns.str.strip().str.lower()
-    df = df.drop_duplicates()
-
-    # Carregamento
-    saida = os.path.join(processed_dir, "isp_rj_processed.csv")
-    df.to_csv(saida, index=False, encoding="utf-8")
-
-    print(f"ETL concluído!")
-    print(f"Linhas processadas: {len(df)}")
-    print(f"Colunas: {len(df.columns)}")
-    print(f"Arquivo salvo em: {saida}")
-
+    # 3. Carga (Persistência no formato otimizado e interoperável Parquet)
+    caminho_saida = '../data/processed/dados_limpos.parquet'
+    df.to_parquet(caminho_saida, index=False)
+    print(f"Dados processados salvos com sucesso em: {caminho_saida}")
 
 if __name__ == "__main__":
-    run_pipeline()
+    executar_pipeline()
